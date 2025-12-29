@@ -35,7 +35,7 @@ Node-RED doesn't get its own Docker network.  Instead, it binds to the Tailscale
 Once both containers are running:
 
 - Run `tailscale ip` inside the Tailscale container
-- Visit: http://<tailscale-ip>:1880
+- Visit: http://&lt;tailscale-ip&gt;:1880
 
 No host ports, no LAN exposure, no reverse proxy required.
 
