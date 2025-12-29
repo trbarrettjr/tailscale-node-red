@@ -1,0 +1,26 @@
+services:
+  tailscale:
+    image: tailscale/tailscale:latest
+    restart: unless-stopped
+    hostname: nodered-gateway
+    environment:
+      - TS_AUTHKEY=
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_USERSPACE=false
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    volumes:
+      - tailscale_state:/var/lib/tailscale
+
+  nodered:
+    image: nodered/node-red:latest
+    restart: unless-stopped
+    network_mode: service:tailscale
+    volumes:
+      - node_red_data:/data
+
+volumes:
+  node_red_data:
+  tailscale_state:
